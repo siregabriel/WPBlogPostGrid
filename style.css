@@ -1,0 +1,90 @@
+/* Contenedor principal con CSS Grid */
+.cbg-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-family: sans-serif;
+}
+
+/* Estilos generales de las tarjetas */
+.cbg-card {
+    background: #fff;
+    border: 1px solid #6b98c5; /* Color azul de los bordes según la imagen */
+    display: flex;
+    flex-direction: column;
+}
+
+/* El Post Destacado abarca 1 columna y 2 filas */
+.cbg-featured {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+/* Imagen del post destacado */
+.cbg-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-bottom: 1px solid #eee;
+}
+
+/* Contenedor de texto */
+.cbg-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.cbg-category {
+    font-size: 0.8rem;
+    color: #333;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.cbg-card h3 {
+    font-size: 1.2rem;
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+    color: #1a1a1a;
+}
+
+.cbg-card p {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 20px;
+    flex-grow: 1; /* Empuja el botón hacia abajo */
+}
+
+/* Estilo del botón */
+.cbg-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border: 1px solid #1a569d; /* Azul más oscuro */
+    color: #1a1a1a;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    text-align: center;
+    align-self: flex-start; /* Evita que el botón ocupe todo el ancho */
+    transition: all 0.3s ease;
+}
+
+.cbg-button:hover {
+    background-color: #f4f8fc;
+}
+
+/* Responsive: Para móviles, poner todo en 1 columna */
+@media (max-width: 768px) {
+    .cbg-container {
+        grid-template-columns: 1fr;
+    }
+    .cbg-featured {
+        grid-column: span 1;
+        grid-row: span 1;
+    }
+}
