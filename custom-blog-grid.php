@@ -3,12 +3,27 @@
  * Atlas Senior Living - Custom Blog Grid Plugin
  * Plugin Name: Custom Blog Grid
  * Description: Muestra un grid de 5 posts (1 destacado con imagen, 4 secundarios) mediante el shortcode [blog_grid category="slug-categoria"].
- * Version: 1.0
+ * Version: 1.0.0
  * Author: Gabriel Rosales 
  * Attached: style.css
  * grosales@atlasseniorliving.com
  */
 
+// 1. Cargar la librería Plugin Update Checker (Ajustado al nombre de tu carpeta)
+require_once plugin_dir_path( __FILE__ ) . 'plugin-update-checker-master/plugin-update-checker.php';
+
+// 2. Usar el namespace correcto de la librería
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+// 3. Inicializar el actualizador con la URL exacta de tu repositorio
+$miActualizador = PucFactory::buildUpdateChecker(
+	'https://github.com/siregabriel/WPBlogPostGrid/', // Tu URL pública
+	__FILE__, // El archivo principal de tu plugin
+	'custom-blog-grid' // El slug (identificador) de tu plugin
+);
+
+// 4. Definir la rama (veo en tu captura que tu rama principal es 'main')
+$miActualizador->setBranch('main');
 
 // Seguridad: Evitar acceso directo
 if ( ! defined( 'ABSPATH' ) ) {
