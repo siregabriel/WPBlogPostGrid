@@ -9,52 +9,35 @@
  * grosales@atlasseniorliving.com
  */
 
-// 1. Cargar la librería Plugin Update Checker (Ajustado al nombre de tu carpeta)
+// 1. Seguridad: Evitar acceso directo. ¡Siempre debe ir al principio!
+if ( ! defined( 'ABSPATH' ) ) {
+    exit;
+}
+
+// ========================================================================
+// SISTEMA DE ACTUALIZACIONES VÍA GITHUB (Plugin Update Checker)
+// ========================================================================
+
+// Cargar la librería (Ajustado al nombre correcto de la carpeta extraída)
 require_once plugin_dir_path( __FILE__ ) . 'plugin-update-checker-master/plugin-update-checker.php';
 
-// 2. Usar el namespace correcto de la librería
+// Usar el namespace correcto de la librería
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
-// 3. Inicializar el actualizador con la URL exacta de tu repositorio
+// Inicializar el actualizador con la URL exacta de tu repositorio
 $miActualizador = PucFactory::buildUpdateChecker(
-	'https://github.com/siregabriel/WPBlogPostGrid/', // Tu URL pública
-	__FILE__, // El archivo principal de tu plugin
-	'custom-blog-grid' // El slug (identificador) de tu plugin
+    'https://github.com/siregabriel/WPBlogPostGrid/', // Tu URL pública limpia
+    __FILE__, // El archivo principal de tu plugin
+    'custom-blog-grid' // El slug (identificador) de tu plugin
 );
 
-// 4. Definir la rama (veo en tu captura que tu rama principal es 'main')
+// Definir la rama principal
 $miActualizador->setBranch('main');
 
-// Seguridad: Evitar acceso directo
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
 
-// 1. Cargar la librería Plugin Update Checker
-require_once plugin_dir_path( __FILE__ ) . 'plugin-update-checker/plugin-update-checker.php';
-
-// 2. Usar el namespace correcto de la librería (versión 5)
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
-
-// 3. Inicializar el actualizador con la URL de tu repositorio en GitHub
-$miActualizador = PucFactory::buildUpdateChecker(
-	'https://github.com/siregabriel/WPBlogPostGrid.git', 
-	__FILE__, // Archivo principal del plugin
-	'custom-blog-grid' // Slug del plugin
-);
-
-// Opcional: Si vas a usar "main" o "master" como rama principal
-$miActualizador->setBranch('main');
-
-// Opcional: SI TU REPOSITORIO ES PRIVADO, necesitas un Token de acceso personal (PAT) de GitHub
-// $miActualizador->setAuthentication('tu_token_generado_en_github');
-
-//INICIAMOS PLUGIN
-
-// Seguridad: Evitar acceso directo
-if ( ! defined( 'ABSPATH' ) ) {
-    exit;
-}
+// ========================================================================
+// FUNCIONALIDAD DEL PLUGIN (Estilos y Shortcode)
+// ========================================================================
 
 // Cargar los estilos CSS
 function cbg_enqueue_styles() {
@@ -64,7 +47,7 @@ add_action( 'wp_enqueue_scripts', 'cbg_enqueue_styles' );
 
 // Crear el Shortcode
 function cbg_render_grid( $atts ) {
-    // Atributos por defecto (si no se pone categoría, muestra los últimos de cualquier categoría)
+    // Atributos por defecto
     $atts = shortcode_atts( array(
         'category' => '', // slug de la categoría
     ), $atts, 'blog_grid' );
