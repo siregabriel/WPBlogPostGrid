@@ -2,10 +2,9 @@
 /**
  * Atlas Senior Living - Custom Blog Grid Plugin
  * Plugin Name: Custom Blog Grid
- * Description: Muestra un grid de 5 posts (1 destacado con imagen, 4 secundarios) mediante el shortcode [blog_grid category="slug-categoria"].
- * Version: 1.0.0
+ * Description: Displays a grid of 5 posts (1 featured with image, 4 secondary) using the shortcode [blog_grid category="slug-category"].
+ * Version: 1.0.1
  * Author: Gabriel Rosales 
- * Attached: style.css
  * grosales@atlasseniorliving.com
  */
 
