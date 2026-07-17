@@ -1,8 +1,13 @@
-# Custom Blog Grid
+=== Custom Blog Grid ===
+Contributors: Gabriel Rosales
+Requires at least: 5.0
+Tested up to: 6.4
+Stable tag: 1.0.4
+License: Proprietary
 
 Displays a beautiful, asymmetrical grid of 5 blog posts.
 
-## Description
+== Description ==
 
 Welcome to the **Custom Blog Grid** plugin! This tool allows you to easily display your latest posts using a modern layout where one featured post stands out alongside four secondary posts. 
 
