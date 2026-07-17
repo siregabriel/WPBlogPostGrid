@@ -65,7 +65,7 @@ function cbg_render_grid( $atts ) {
     // Argumentos de la consulta
     $args = array(
         'post_type'      => 'post',
-        'posts_per_page' => 5, // Exactamente los 5 que necesitas
+        'posts_per_page' => 5, 
         'post_status'    => 'publish',
     );
 
