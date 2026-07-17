@@ -3,7 +3,7 @@
  * Atlas Senior Living - Custom Blog Grid Plugin
  * Plugin Name: Custom Blog Grid
  * Description: Displays a grid of 5 blog posts (1 featured with image, 4 secondary) using the shortcode [blog_grid category="slug-category"].
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Gabriel Rosales 
  * grosales@atlasseniorliving.com
  */
@@ -39,8 +39,18 @@ $miActualizador->setBranch('main');
 // ========================================================================
 
 // Cargar los estilos CSS
+// Cargar los estilos CSS con Cache automático
 function cbg_enqueue_styles() {
-    wp_enqueue_style( 'cbg-styles', plugin_dir_url( __FILE__ ) . 'style.css' );
+    $css_file = plugin_dir_path( __FILE__ ) . 'style.css';
+    // Obtiene el timestamp (fecha exacta) de la última modificación del archivo CSS
+    $css_version = file_exists( $css_file ) ? filemtime( $css_file ) : '1.0.4';
+    
+    wp_enqueue_style( 
+        'cbg-styles', 
+        plugin_dir_url( __FILE__ ) . 'style.css', 
+        array(), 
+        $css_version 
+    );
 }
 add_action( 'wp_enqueue_scripts', 'cbg_enqueue_styles' );
 
