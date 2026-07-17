@@ -2,8 +2,8 @@
 /**
  * Atlas Senior Living - Custom Blog Grid Plugin
  * Plugin Name: Custom Blog Grid
- * Description: Displays a grid of 5 posts (1 featured with image, 4 secondary) using the shortcode [blog_grid category="slug-category"].
- * Version: 1.0.1
+ * Description: Displays a grid of 5 blog posts (1 featured with image, 4 secondary) using the shortcode [blog_grid category="slug-category"].
+ * Version: 1.0.2
  * Author: Gabriel Rosales 
  * grosales@atlasseniorliving.com
  */
@@ -46,9 +46,10 @@ add_action( 'wp_enqueue_scripts', 'cbg_enqueue_styles' );
 
 // Crear el Shortcode
 function cbg_render_grid( $atts ) {
-    // Atributos por defecto
+    // Atributos por defecto ampliados
     $atts = shortcode_atts( array(
-        'category' => '', // slug de la categoría
+        'category'          => '', // slug de la categoría
+        'featured_position' => 'left', // 'left' o 'right'
     ), $atts, 'blog_grid' );
 
     // Argumentos de la consulta
@@ -68,8 +69,11 @@ function cbg_render_grid( $atts ) {
         return '<p>No se encontraron artículos.</p>';
     }
 
-    // Iniciar el contenedor principal
-    $output = '<div class="cbg-container">';
+    // === NUEVO: Clase dinámica según la posición elegida ===
+    $layout_class = ( $atts['featured_position'] === 'right' ) ? ' cbg-layout-right' : '';
+
+    // Iniciar el contenedor principal con la clase dinámica
+    $output = '<div class="cbg-container' . $layout_class . '">';
     $post_count = 0;
 
     while ( $query->have_posts() ) {
@@ -86,7 +90,7 @@ function cbg_render_grid( $atts ) {
         $button = '<a href="' . esc_url( $link ) . '" class="cbg-button">Read the full article &rarr;</a>';
 
         if ( $post_count === 1 ) {
-            // --- POST DESTACADO (Izquierda) ---
+            // --- POST DESTACADO (Mismo HTML, el CSS hará el cambio) ---
             $image = get_the_post_thumbnail( get_the_ID(), 'medium_large' );
             
             $output .= '<div class="cbg-card cbg-featured">';
@@ -98,17 +102,17 @@ function cbg_render_grid( $atts ) {
             $output .= '<h3>' . esc_html( $title ) . '</h3>';
             $output .= '<p>' . esc_html( $excerpt ) . '</p>';
             $output .= $button;
-            $output .= '</div>'; // fin content
-            $output .= '</div>'; // fin card
+            $output .= '</div>'; 
+            $output .= '</div>'; 
         } else {
-            // --- POSTS SECUNDARIOS (Derecha) ---
+            // --- POSTS SECUNDARIOS ---
             $output .= '<div class="cbg-card cbg-secondary">';
             $output .= '<div class="cbg-content">';
             $output .= '<h3>' . esc_html( $title ) . '</h3>';
             $output .= '<p>' . esc_html( $excerpt ) . '</p>';
             $output .= $button;
-            $output .= '</div>'; // fin content
-            $output .= '</div>'; // fin card
+            $output .= '</div>'; 
+            $output .= '</div>'; 
         }
     }
 

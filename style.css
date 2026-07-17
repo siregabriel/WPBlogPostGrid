@@ -88,3 +88,28 @@
         grid-row: span 1;
     }
 }
+
+/* V. 1.0.2 */
+/* ==========================================================
+   NUEVO: Modificador para poner el destacado a la derecha 
+   ========================================================== */
+.cbg-layout-right .cbg-featured {
+    /* Forzamos el elemento a la 3ra columna.
+       CSS Grid automáticamente pondrá los demás en las columnas 1 y 2 vacías. */
+    grid-column: 3; 
+}
+
+/* ==========================================================
+   ACTUALIZACIÓN RESPONSIVE (Reemplaza o ajusta tu @media query)
+   ========================================================== */
+@media (max-width: 768px) {
+    .cbg-container {
+        grid-template-columns: 1fr; /* Todo a 1 columna */
+    }
+    
+    .cbg-featured,
+    .cbg-layout-right .cbg-featured {
+        grid-column: span 1; /* Reseteamos a 1 columna para móviles */
+        grid-row: span 1;
+    }
+}
