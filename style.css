@@ -113,3 +113,36 @@
         grid-row: auto;
     }
 }
+/* V. 1.1.0 */
+/* ==========================================================
+   ESTILOS DE LA PAGINACIÓN
+   ========================================================== */
+.cbg-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    width: 100%;
+}
+
+.cbg-pagination a,
+.cbg-pagination span.current {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #6b98c5;
+    color: #1a569d;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.cbg-pagination span.current {
+    background-color: #1a569d;
+    color: #fff;
+    border-color: #1a569d;
+}
+
+.cbg-pagination a:hover {
+    background-color: #f4f8fc;
+}
