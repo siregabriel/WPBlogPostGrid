@@ -3,9 +3,10 @@
  * Atlas Senior Living - Custom Blog Grid Plugin
  * Plugin Name: Custom Blog Grid
  * Description: Displays a grid of 5 blog posts with pagination and a settings panel for button customization.
- * Version: 1.1.0
- * Author: Gabriel Rosales 
- * gabrielrosales.com
+ * Version: 1.1.1
+ * Author: Gabriel Rosales
+ * Author URI: https://gabrielrosales.org/plugins/custom-blog-grid
+ * grosales@atlasseniorliving.com
  */
 
 // Seguridad: Evitar acceso directo
@@ -35,6 +36,19 @@ $miActualizador->setBranch('main');
 add_action( 'admin_menu', 'cbg_create_menu' );
 function cbg_create_menu() {
     add_options_page( 'Blog Grid Settings', 'Blog Grid', 'manage_options', 'cbg-settings', 'cbg_settings_page' );
+}
+
+// 1.1. Agregar un enlace rápido en la lista de plugins
+add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'cbg_add_settings_link' );
+
+function cbg_add_settings_link( $links ) {
+    // Construimos el enlace apuntando al slug de nuestro menú 'cbg-settings'
+    $settings_link = '<a href="' . admin_url( 'options-general.php?page=cbg-settings' ) . '">' . __( 'Settings', 'custom-blog-grid' ) . '</a>';
+    
+    // array_unshift empuja el enlace al principio de la lista (antes de "Deactivate")
+    array_unshift( $links, $settings_link );
+    
+    return $links;
 }
 
 // 2. Registrar las opciones en la base de datos
