@@ -1,6 +1,6 @@
 # Custom Blog Grid
 
-Displays a beautiful, asymmetrical grid of 5 blog posts.
+Displays a grid of 5 blog posts.
 
 ## Description
 
